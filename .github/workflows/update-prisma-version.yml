@@ -1,7 +1,5 @@
 name: Update prisma version
 on:
-  schedule:
-    - cron: "0 0 * * *"
   workflow_dispatch:
 
 jobs:
@@ -14,21 +12,16 @@ jobs:
         uses: actions/setup-node@v2
       - name: Install Dependencies
         run: yarn
-      - name: Check for Prisma CLI update
-        id: check_update
-        run: node check-for-version.js
-      - name: Update version
-        if: ${{ steps.check_update.outputs.new_prisma_version }}
+      - name: Set Prisma version to 6.8.2
         run: |
-          echo '${{ steps.check_update.outputs.new_prisma_version }}' > version
-          git config --global user.name 'Harshit Pant'
-          git config --global user.email 'pantharshit00@gmail.com'
-          git commit -am "chore: auto update prisma version for ${{ steps.check_update.outputs.new_prisma_version }}"
+          echo '6.8.2' > version
+          git config --global user.name 'KP'
+          git config --global user.email 'rinyakok@gmail.com'
+          git commit -am "chore: set prisma version to 6.8.2"
           git push
       - name: Trigger build
-        if: ${{ steps.check_update.outputs.new_prisma_version }}
         uses: benc-uk/workflow-dispatch@v1
         with:
           workflow: build armv7
           token: ${{ secrets.GH_TOKEN }}
-          inputs: '{ "tag": "${{ steps.check_update.outputs.new_prisma_version }}" }'
+          inputs: '{ "tag": "6.8.2" }'

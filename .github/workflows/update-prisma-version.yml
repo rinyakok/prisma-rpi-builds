@@ -12,13 +12,13 @@ jobs:
         uses: actions/setup-node@v2
       - name: Install Dependencies
         run: yarn
-      - name: Set Prisma version to 6.8.2
-        run: |
-          echo '6.8.2' > version
-          git config --global user.name 'KP'
-          git config --global user.email 'rinyakok@gmail.com'
-          git commit -am "chore: set prisma version to 6.8.2"
-          git push
+#      - name: Set Prisma version to 6.8.2
+#        run: |
+#          echo '6.8.2' > version
+#          git config --global user.name 'KP'
+#          git config --global user.email 'rinyakok@gmail.com'
+#          git commit -am "chore: set prisma version to 6.8.2"
+#          git push
       - name: Trigger build
         uses: benc-uk/workflow-dispatch@v1
         with:
